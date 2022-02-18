@@ -1,0 +1,24 @@
+GET http://localhost:3000/rooms/
+
+###
+GET http://localhost:3000/rooms/620d9bf4f6f6211adb2862da
+
+###
+POST http://localhost:3000/rooms
+Content-Type: application/json
+
+{
+    "name": "Room 3",
+    "description": "The room beside rooom 1."
+}
+
+###
+DELETE http://localhost:3000/rooms/620cbd130c0b243eff3ad2b9
+
+###
+PATCH http://localhost:3000/rooms/620cbd130c0b243eff3ad2b9
+Content-Type: application/json
+
+{
+    "name": "Room 2"
+}
