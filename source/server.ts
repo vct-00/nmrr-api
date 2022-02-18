@@ -1,8 +1,10 @@
 import http from 'http';
 import express, { Express } from 'express';
-import roomRouter from './routes/rooms';
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import roomRouter from './routes/rooms';
+import bookingRouter from './routes/bookings';
+
 
 const app: Express = express();
 
@@ -19,6 +21,7 @@ app.use(express.json());
 
 /** Routes */
 app.use('/rooms', roomRouter);
+app.use('/bookings', bookingRouter);
 
 /** Server */
 app.listen(3000, () => console.log('Server Started'))

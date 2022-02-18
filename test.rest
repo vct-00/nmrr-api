@@ -22,3 +22,21 @@ Content-Type: application/json
 {
     "name": "Room 2"
 }
+
+###
+POST http://localhost:3000/bookings
+Content-Type: application/json
+
+{
+        "roomId": "620d9bf4f6f6211adb2862da",
+        "name": "Johann Smith",
+        "notes": "Test Demo",
+        "startDate": 1645150951827,
+        "endDate": 1645153951827
+}
+
+### get booking details
+GET http://localhost:3000/bookings/620d9bf4f6f6211adb2862da
+
+### Get all bookings by room id
+GET http://localhost:3000/bookings/room/620d9bf4f6f6211adb2862da
