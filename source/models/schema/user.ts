@@ -23,12 +23,12 @@ const UserSchema = new mongoose.Schema({
     required: true,
   },
   dateCreated: {
-    type: Date,
+    type: Number,
     required: true,
     default: Date.now,
   },
   dateUpdated: {
-    type: Date,
+    type: Number,
     required: true,
     default: Date.now,
   },

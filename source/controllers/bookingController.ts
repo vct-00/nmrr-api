@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import Booking from "../models/schema/booking";
+import BookingSchema from "../models/schema/booking";
 import Room from "../models/schema/room";
 
 const getBookingById = async (req: Request, res: Response) => {
   try {
-    const booking = await Booking.findById(req.params.id);
+    const booking = await BookingSchema.findById(req.params.id);
     if (booking == null)
       return res.status(404).json({ message: "Booking does not exist." });
     else res.send({ booking, status: 200 });
@@ -20,7 +20,7 @@ const getBookingByRoomId = async (req: Request, res: Response) => {
     if (room == null)
       return res.status(404).json({ message: "Room not found." });
 
-    const booking = await Booking.find({ roomId: req.params.id });
+    const booking = await BookingSchema.find({ roomId: req.params.id });
     if (booking == null)
       return res.status(404).json({ message: "Room bookings not found." });
 
@@ -31,7 +31,7 @@ const getBookingByRoomId = async (req: Request, res: Response) => {
 };
 
 const addBooking = async (req: Request, res: Response) => {
-  const booking = new Booking({
+  const booking = new BookingSchema({
     roomId: req.body.roomId,
     startDate: req.body.startDate,
     endDate: req.body.endDate,
