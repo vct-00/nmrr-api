@@ -8,7 +8,7 @@ router.post("/", controller.getNewAccessToken);
 //logout: revoke refresh token
 router.delete("/logout", controller.revokeRefreshToken);
 
-//logout: revoke refresh token
+//login: authenticate and authorize user
 router.post("/login", controller.logIn);
 
 export = router;

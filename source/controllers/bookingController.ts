@@ -16,11 +16,11 @@ const getBookingById = async (req: Request, res: Response) => {
 const getBookingByRoomId = async (req: Request, res: Response) => {
   try {
     console.log(req.params);
-    const room = await Room.findById(req.params.id);
+    const room = await Room.findById(req.params.roomId);
     if (room == null)
       return res.status(404).json({ message: "Room not found." });
 
-    const booking = await BookingSchema.find({ roomId: req.params.id });
+    const booking = await BookingSchema.find({ roomId: req.params.roomId });
     if (booking == null)
       return res.status(404).json({ message: "Room bookings not found." });
 
