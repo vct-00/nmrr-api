@@ -1,16 +1,12 @@
 import { ObjectId } from "mongodb";
 
-export default class UserModel {
-  constructor(
-    public username: string,
-    public firstName: string,
-    public lastName: string,
-    public role: string,
-    public password: string,
-    public dateCreated: Number,
-    public dateUpdated: Number,
-    public id?: ObjectId
-  ) {}
+export default interface UserModel {
+  username: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  password: string;
+  dateCreated: Number;
+  dateUpdated: Number;
+  id?: ObjectId;
 }
-
-module.exports = UserModel;
