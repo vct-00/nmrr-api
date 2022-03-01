@@ -6,7 +6,7 @@ const getBookingById = async (req: Request, res: Response) => {
   try {
     const booking = await BookingSchema.findById(req.params.id);
 
-    if (booking == null) throw Error("Booking does not exist.");
+    if (booking === null) throw Error("Booking does not exist.");
     else res.status(200).json({ booking });
   } catch (err: any) {
     return res.status(500).json({ message: err.message });

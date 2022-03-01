@@ -45,7 +45,7 @@ const validateRoomExists = async (
     if (
       (await Room.findById(
         req.params.roomId || req.body.roomId || req.params.id
-      )) == null
+      )) === null
     )
       throw Error("Room not found.");
   } catch (err: any) {

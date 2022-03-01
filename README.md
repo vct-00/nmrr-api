@@ -2,13 +2,21 @@
 
 API for noaya meeting room resevation
 
-## Getting Started
+## Prerequisite
 
-### Dependencies
+- Install MongoDB
+- Install NodeJS
 
-```
-npm install typescript ts-node express @types/express nodemon bycrypt @types/bycrypt mongodb
-```
+### Environment Setup
+
+1. Copy .env.example and rename it to .env
+2. Use default values or change it according to your machine setup
+
+### Start Development Server
+
+1. `npm install`
+2. `npm run dev`
+3. Server is at http://localhost:3000 by default.
 
 ### Routes
 
