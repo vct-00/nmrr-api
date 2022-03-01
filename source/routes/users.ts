@@ -3,6 +3,7 @@ import controller from "../controllers/userController";
 import authController from "../controllers/authController";
 const router = express.Router();
 
-router.post("/", controller.addUser);
+//Add admin user
+router.post("/", authController.authorizeToken, controller.addUser);
 
 export = router;

@@ -1,35 +1,30 @@
 import { Request, Response, NextFunction } from "express";
 import BookingSchema from "../models/schema/booking";
-import Room from "../models/schema/room";
 
+//retrieve booking details by booking ID
 const getBookingById = async (req: Request, res: Response) => {
   try {
     const booking = await BookingSchema.findById(req.params.id);
-    if (booking == null)
-      return res.status(404).json({ message: "Booking does not exist." });
-    else res.send({ booking, status: 200 });
-  } catch (err) {
-    return res.status(500).json({ message: "Failed" });
+
+    if (booking == null) throw Error("Booking does not exist.");
+    else res.status(200).json({ booking });
+  } catch (err: any) {
+    return res.status(500).json({ message: err.message });
   }
 };
 
+//retrieve all bookings of room by room ID
 const getBookingByRoomId = async (req: Request, res: Response) => {
   try {
-    console.log(req.params);
-    const room = await Room.findById(req.params.roomId);
-    if (room == null)
-      return res.status(404).json({ message: "Room not found." });
-
-    const booking = await BookingSchema.find({ roomId: req.params.roomId });
-    if (booking == null)
-      return res.status(404).json({ message: "Room bookings not found." });
-
-    res.send({ booking, status: 200 });
-  } catch (err) {
-    return res.status(500).json({ message: "Failed" });
+    res
+      .status(200)
+      .json(await BookingSchema.find({ roomId: req.params.roomId }));
+  } catch (err: any) {
+    return res.status(500).json({ message: err.message });
   }
 };
 
+//validate and save meeting room booking
 const addBooking = async (req: Request, res: Response) => {
   const booking = new BookingSchema({
     roomId: req.body.roomId,
@@ -37,16 +32,31 @@ const addBooking = async (req: Request, res: Response) => {
     endDate: req.body.endDate,
     name: req.body.name,
     notes: req.body.notes,
-    dateCreated: req.body.dateCreated,
-    dateUpdated: req.body.dateUpdated,
   });
 
   try {
-    const newBooking = await booking.save();
-    res.send({ newBooking, status: 201 });
-  } catch (err) {
-    res.status(400).json({ message: "Failed" });
+    //validate start & end time
+    if (booking.endDate < booking.startDate) throw Error("Time invalid");
+
+    //check if time is available
+    let conflictBookings = (
+      await BookingSchema.find({ roomId: booking.roomId })
+    ).filter(
+      (x) =>
+        (x.startDate <= booking.startDate && x.endDate >= booking.startDate) ||
+        (x.startDate <= booking.endDate && x.endDate >= booking.endDate)
+    );
+    if (conflictBookings.length != 0) throw Error("Time unvailable");
+
+    //try saving
+    res.status(201).json(await booking.save());
+  } catch (err: any) {
+    res.status(400).json({ message: err.message });
   }
 };
 
-export default { getBookingById, getBookingByRoomId, addBooking };
+export default {
+  getBookingById,
+  getBookingByRoomId,
+  addBooking,
+};
