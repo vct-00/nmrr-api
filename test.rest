@@ -18,32 +18,39 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjE0MmRjY
 ### Add booking 
 POST http://localhost:3000/bookings
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI1YzU5ZDM3MDJmM2U1ZDQ3MTBiYzgiLCJ1c2VybmFtZSI6InZfdGFuIiwiZmlyc3ROYW1lIjoiVmFuZXNzIiwibGFzdE5hbWUiOiJUYW4iLCJyb2xlIjoiQWRtaW4iLCJwYXNzd29yZCI6IiQyYiQxMCRib2xpalNrT3dJejJzOXlPcVhCbGplNk5jeU1waVg5amRYN1Y4MjNxRzM2dGxmQmo5dmpZeSIsImRhdGVDcmVhdGVkIjoxNjQ2NjQyNTg5MjE3LCJkYXRlVXBkYXRlZCI6MTY0NjY0MjU4OTIxNywiX192IjowLCJpYXQiOjE2NDY2NDM3Njd9.tgZxz2X85s1wBHzfBxnzwQBzHCNQ4zaZhlsAebXzSrE
 
 {
-        "roomId": "620d9bf4f6f6211adb2862da",
-        "name": "Alex Davidson",
-        "notes": "Test 2",
-        "startDate": 1435089545,
-        "endDate": 1445089545
+        "roomId": "620ee483db4037ba84e74952",
+        "notes": "Standup Meeting",
+        "startDate": 1647804800000,
+        "endDate": 1647805700000
 }
 
 ### get booking details by id
 GET http://localhost:3000/bookings/620f02e7713aef3ad866ecbf
 
+### Get all bookings by user id
+GET http://localhost:3000/bookings/user/6225c59d3702f3e5d4710bc8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI1YzU5ZDM3MDJmM2U1ZDQ3MTBiYzgiLCJ1c2VybmFtZSI6InZfdGFuIiwiZmlyc3ROYW1lIjoiVmFuZXNzIiwibGFzdE5hbWUiOiJUYW4iLCJyb2xlIjoiQWRtaW4iLCJwYXNzd29yZCI6IiQyYiQxMCRib2xpalNrT3dJejJzOXlPcVhCbGplNk5jeU1waVg5amRYN1Y4MjNxRzM2dGxmQmo5dmpZeSIsImRhdGVDcmVhdGVkIjoxNjQ2NjQyNTg5MjE3LCJkYXRlVXBkYXRlZCI6MTY0NjY0MjU4OTIxNywiX192IjowLCJpYXQiOjE2NDY2NDM3Njd9.tgZxz2X85s1wBHzfBxnzwQBzHCNQ4zaZhlsAebXzSrE
+
+
 ### Get all bookings by room id
 GET http://localhost:3000/bookings/room/620d9bf4f6f6211adb2862da
 
-###
 
 ### Add new user
 POST http://localhost:3000/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjFkN2Y5NWExYzgwM2JlOTg1ZmEwZDEiLCJ1c2VybmFtZSI6ImNoYXJsZXNfYm95bGUiLCJmaXJzdE5hbWUiOiJDaGFybGVzIiwibGFzdE5hbWUiOiJCb3lsZSIsInJvbGUiOiJBZG1pbiIsInBhc3N3b3JkIjoiJDJiJDEwJHp1cXU1TEg5OG0vVFhqMWtJTDdKenUxSUw4eXhsUEtEeHBTVExmMXNCR1V0dkF1ZFJtaWsuIiwiZGF0ZUNyZWF0ZWQiOjE2NDYxMDAzNzM4ODQsImRhdGVVcGRhdGVkIjoxNjQ2MTAwMzczODg0LCJfX3YiOjAsImlhdCI6MTY0NjI5MDg4NX0.4F3SsZLOWiBY90z2pP_i2RNdR9M0oJr4N03W3h49mTM
+
 
 {
-        "username": "charles_boyle",
+        "username": "v_tan",
         "password": "password",
-        "firstName": "Charles",
-        "lastName": "Boyle",
+        "firstName": "Vaness",
+        "lastName": "Tan",
         "role": "Admin"
 }
 
@@ -53,7 +60,7 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-        "username": "JakeP",
+        "username": "v_tan",
         "password": "password"
 }
 
