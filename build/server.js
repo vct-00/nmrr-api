@@ -39,6 +39,6 @@ app.use("/bookings", bookings_1.default);
 app.use("/users", users_1.default);
 app.use("/", auth_1.default);
 /** Server */
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT, function () {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
