@@ -4,9 +4,9 @@
   "description": "",
   "main": "source/server.ts",
   "scripts": {
-    "start": "node build/server.js",
     "dev": "nodemon source/server.ts",
-    "build": "rm -rf build/ && prettier --write source/ && tsc"
+    "build": "rm -rf build/ && prettier --write source/ && tsc",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "",
