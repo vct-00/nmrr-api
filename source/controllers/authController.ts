@@ -31,8 +31,8 @@ const logIn = async (req: Request, res: Response) => {
   if (!authentication.success)
     return res.status(401).json({ message: "Login Failed." });
 
-  delete authentication.user.password;
-  const user: User = authentication.user;
+  var user: User = authentication.user;
+  user.password = undefined;
 
   const accessToken = generateAccessToken(user);
   addValidToken(accessToken);

@@ -35,10 +35,16 @@ const addBooking = async (req: Request, res: Response) => {
   });
 
   try {
+    //get user full name and id from token to include in booking
+    const decoded: any = decodeToken(req);
+
+    booking.name = decoded.firstName + " " + decoded.lastName;
+    booking.userId = decoded._id;
+
     //validate start & end time
     if (booking.endDate < booking.startDate) throw Error("Time invalid");
 
-    //check if time is available
+    //check if room schedule is available
     let conflictBookings = (
       await BookingSchema.find({ roomId: booking.roomId })
     ).filter(
@@ -46,13 +52,17 @@ const addBooking = async (req: Request, res: Response) => {
         (x.startDate <= booking.startDate && x.endDate >= booking.startDate) ||
         (x.startDate <= booking.endDate && x.endDate >= booking.endDate)
     );
-    if (conflictBookings.length != 0) throw Error("Time unvailable");
+    if (conflictBookings.length != 0) throw Error("Room Schedule unavailable.");
 
-    //get user full name and id from token to include in booking
-    const decoded: any = decodeToken(req);
-
-    booking.name = decoded.firstName + " " + decoded.lastName;
-    booking.userId = decoded._id;
+    //check if room schedule is available
+    conflictBookings = (
+      await BookingSchema.find({ userId: booking.userId })
+    ).filter(
+      (x) =>
+        (x.startDate <= booking.startDate && x.endDate >= booking.startDate) ||
+        (x.startDate <= booking.endDate && x.endDate >= booking.endDate)
+    );
+    if (conflictBookings.length != 0) throw Error("User Schedule unavailable.");
 
     //try saving
     res.status(201).json(await booking.save());
