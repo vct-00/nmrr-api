@@ -1,15 +1,17 @@
 import express, { Express } from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import roomRouter from "./routes/rooms";
 import bookingRouter from "./routes/bookings";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/users";
+require("dotenv").config();
 
 const app: Express = express();
 
-dotenv.config();
-mongoose.connect(process.env.DATABASE_URL as string);
+const DATABASE_URL =
+  "mongodb+srv://admin:admin@roomreservationsystem.iv5bn.mongodb.net/rrs?retryWrites=true&w=majority";
+
+mongoose.connect(DATABASE_URL as string);
 const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Database"));
